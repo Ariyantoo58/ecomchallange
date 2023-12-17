@@ -14,6 +14,9 @@ const nextConfig = {
 			{
 				hostname: "www.lg.com",
 			},
+			{
+				hostname: "images.pexels.com",
+			},
 		],
 	},
 };

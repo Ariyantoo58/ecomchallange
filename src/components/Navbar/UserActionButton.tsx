@@ -1,8 +1,11 @@
-import { ShoppingCart } from "@phosphor-icons/react";
+import { PlusSquare, ShoppingCart } from "@phosphor-icons/react";
 import Link from "next/link";
+import AddProduct from "./addProduct";
+import { useState } from "react";
 // import { authUserSession } from "@/libs/auth-libs";
 
 const UserActionButton = () => {
+	const [open, setOpen] = useState(false);
 	const user = true;
 
 	const actionLabel = user ? "Sign Out" : "Sign In";
@@ -10,7 +13,11 @@ const UserActionButton = () => {
 
 	return (
 		<div className="flex justify-between gap-2">
-			<Link href="/cart" className="py-1 px-10">
+			<button className="py-1 " onClick={() => setOpen(!open)}>
+				<PlusSquare fontSize={27} />
+				<AddProduct setOpen={setOpen} open={open} />
+			</button>
+			<Link href="/cart" className="py-1 px-8">
 				<ShoppingCart fontSize={25} />
 			</Link>
 			{user ? (

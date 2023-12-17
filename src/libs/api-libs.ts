@@ -14,6 +14,19 @@ export const getProductResponse = async () => {
 		return error;
 	}
 };
+export const CreateProductResponse = async (body: any) => {
+	const configurationObject = {
+		method: "POST",
+		url: `${endpoint}/api/products`,
+		data: body,
+	};
+	try {
+		const response = await axios(configurationObject);
+		return response;
+	} catch (error) {
+		return error;
+	}
+};
 export const getProductDetail = async (id: number) => {
 	const configurationObject = {
 		method: "GET",
@@ -22,6 +35,19 @@ export const getProductDetail = async (id: number) => {
 	try {
 		const response = await axios(configurationObject);
 		return response.data.data;
+	} catch (error) {
+		return error;
+	}
+};
+export const createCart = async (body: any) => {
+	const configurationObject = {
+		method: "POST",
+		url: `${endpoint}/api/carts`,
+		data: body,
+	};
+	try {
+		const response = await axios(configurationObject);
+		return response;
 	} catch (error) {
 		return error;
 	}
