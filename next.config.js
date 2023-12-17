@@ -1,6 +1,21 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-}
+	images: {
+		remotePatterns: [
+			{
+				hostname: "dfstudio-d420.kxcdn.com",
+			},
+			{
+				hostname: "selularid.sgp1.cdn.digitaloceanspaces.com",
+			},
+			{
+				hostname: "cdn.timesmedia.co.id",
+			},
+			{
+				hostname: "www.lg.com",
+			},
+		],
+	},
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
