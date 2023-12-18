@@ -52,3 +52,15 @@ export const createCart = async (body: any) => {
 		return error;
 	}
 };
+export const getCart = async () => {
+	const configurationObject = {
+		method: "GET",
+		url: `${endpoint}/api/carts`,
+	};
+	try {
+		const response = await axios(configurationObject);
+		return response.data;
+	} catch (error) {
+		return error;
+	}
+};

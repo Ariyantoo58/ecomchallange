@@ -14,7 +14,6 @@ const inter = Inter({ subsets: ["latin"] });
 const Home = ({ products }: any) => {
 	return (
 		<div>
-			<Navbar />
 			<>
 				<section className="my-8">
 					<Header
@@ -24,7 +23,7 @@ const Home = ({ products }: any) => {
 					/>
 					<ProductsList products={products} />
 				</section>
-				<Footer />
+
 				{/* <section>
           <Header title="Rekomendasi" />
           <AnimeList api={recommendedAnime} />

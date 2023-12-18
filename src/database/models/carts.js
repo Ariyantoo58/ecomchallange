@@ -3,7 +3,15 @@ import { Model, DataTypes } from "sequelize";
 import connection from "../connection";
 
 const initCarts = (sequelize, Types) => {
-	class carts extends Model {}
+	class carts extends Model {
+		static associate(models) {
+			// define association here
+			this.hasMany(models.products, {
+				foreignKey: "productId",
+				as: "product",
+			});
+		}
+	}
 	carts.init(
 		{
 			productId: Types.INTEGER,
@@ -17,18 +25,6 @@ const initCarts = (sequelize, Types) => {
 		}
 	);
 
-	carts.associate = function (models) {
-		carts.hasMany(models.products, {
-			foreignKey: "productId",
-			as: "product",
-		});
-	};
-	carts.associate = function (models) {
-		carts.hasMany(models.user, {
-			foreignKey: "userId",
-			as: "user",
-		});
-	};
 	return carts;
 };
 
