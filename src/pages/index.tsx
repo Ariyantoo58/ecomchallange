@@ -22,7 +22,7 @@ const Home = ({ products }: any) => {
 						linkTitle="Lihat Semua"
 						linkHref="/populer"
 					/>
-					{/* <ProductsList products={products} /> */}
+					<ProductsList products={products} />
 				</section>
 
 				{/* <section>
@@ -45,7 +45,7 @@ export async function getStaticProps() {
 	// will receive `posts` as a prop at build time
 	return {
 		props: {
-			products: [],
+			products,
 		},
 	};
 }
