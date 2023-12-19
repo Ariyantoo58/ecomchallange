@@ -22,7 +22,7 @@ const Home = ({ products }: any) => {
 						linkTitle="Lihat Semua"
 						linkHref="/populer"
 					/>
-					<ProductsList products={products} />
+					{/* <ProductsList products={products} /> */}
 				</section>
 
 				{/* <section>

@@ -16,10 +16,10 @@ const UserActionButton = () => {
 
 	return (
 		<div className="flex justify-between gap-2">
-			<button className="py-1 " onClick={handleClick}>
+			{/* <button className="py-1 " onClick={handleClick}>
 				<PlusSquare fontSize={27} />
 				<AddProduct setOpen={setOpen} open={open} />
-			</button>
+			</button> */}
 			<Link
 				href="/carts"
 				className="bg-color-dark text-color-accent py-1 px-12 inline-block"
