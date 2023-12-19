@@ -1,13 +1,28 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { Fragment, useEffect, useRef, useState } from "react";
+import {
+	FormEvent,
+	Fragment,
+	SetStateAction,
+	useEffect,
+	useRef,
+	useState,
+} from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import { createCart } from "@/libs/api-libs";
+import { stringify } from "querystring";
 
 const ProductsList = ({ products }: any) => {
 	const [open, setOpen] = useState(false);
+	const [data, setData] = useState([]);
+
+	const handleClick = (props: SetStateAction<never[]>) => {
+		setData(props);
+		setOpen(!open);
+		console.log("first");
+	};
 
 	return (
 		<div className="grid md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-4 px-4">
@@ -32,10 +47,9 @@ const ProductsList = ({ products }: any) => {
 							{data.productDescription}
 						</p>
 						<a
-							onClick={() => setOpen(!open)}
+							onClick={() => handleClick(data)}
 							className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
 						>
-							<ModalProducts prod={data} setOpen={setOpen} open={open} />
 							Read More
 							<svg
 								className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
@@ -56,6 +70,8 @@ const ProductsList = ({ products }: any) => {
 					</div>
 				</div>
 			))}
+
+			<ModalProducts prod={data} setOpen={setOpen} open={open} />
 		</div>
 	);
 };
@@ -67,17 +83,19 @@ function ModalProducts({ prod, setOpen, open }: any) {
 	const [payload, setPayload] = useState({
 		productId: prod.id,
 		quantity: 0,
-		userId: 123,
+		userId: 1,
+		prodactList: prod,
 	});
 
-	const handleSubmit = async () => {
+	const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+		event.preventDefault();
 		setLoading(true);
 		await createCart(payload).then((res: any) => {
 			console.log({ res });
-			if (res.status === 200) {
-				setLoading(false);
-				setOpen(false);
-			}
+			// if (res.status === 200) {
+			// 	setLoading(false);
+			// 	setOpen(false);
+			// }
 		});
 	};
 	const [close, setClose] = useState(false);
@@ -87,7 +105,8 @@ function ModalProducts({ prod, setOpen, open }: any) {
 		setPayload({
 			productId: prod.id,
 			quantity: 0,
-			userId: 123,
+			userId: 1,
+			prodactList: prod,
 		});
 		setLoading(!loading);
 	}, [open]);
@@ -125,7 +144,7 @@ function ModalProducts({ prod, setOpen, open }: any) {
 								leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
 							>
 								<Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 md:w-full sm:w-full sm:max-w-lg">
-									<form onSubmit={handleSubmit}>
+									<form onSubmit={(event) => handleSubmit(event)}>
 										<div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
 											<div className="">
 												<center>
@@ -158,7 +177,7 @@ function ModalProducts({ prod, setOpen, open }: any) {
 														</label>
 														<input
 															type="number"
-															min={0}
+															min={1}
 															onChange={(e) =>
 																(payload.quantity = parseInt(e.target.value))
 															}

@@ -64,3 +64,15 @@ export const getCart = async () => {
 		return error;
 	}
 };
+export const deleteCart = async (id: number) => {
+	const configurationObject = {
+		method: "DELETE",
+		url: `${endpoint}/api/carts/${id}`,
+	};
+	try {
+		const response = await axios(configurationObject);
+		return response.data;
+	} catch (error) {
+		return error;
+	}
+};

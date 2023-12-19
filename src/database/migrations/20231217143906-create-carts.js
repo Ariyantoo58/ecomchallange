@@ -23,6 +23,9 @@ module.exports = {
 					key: "id",
 				},
 			},
+			prodactList: {
+				type: Sequelize.JSON,
+			},
 			quantity: {
 				type: Sequelize.INTEGER,
 			},

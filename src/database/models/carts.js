@@ -17,6 +17,7 @@ const initCarts = (sequelize, Types) => {
 			productId: Types.INTEGER,
 			quantity: Types.INTEGER,
 			userId: Types.INTEGER,
+			prodactList: Types.JSON,
 		},
 		{
 			sequelize,

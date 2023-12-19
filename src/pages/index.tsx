@@ -14,6 +14,7 @@ const inter = Inter({ subsets: ["latin"] });
 const Home = ({ products }: any) => {
 	return (
 		<div>
+			<Navbar />
 			<>
 				<section className="my-8">
 					<Header

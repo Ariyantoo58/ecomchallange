@@ -1,18 +1,20 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import carts from "../../../database/models/carts";
+// import carts from "../../../database/models/carts";
 import products from "../products";
+import carts from "../../../database/models/carts";
+import connection from "@/database/connection";
+import { QueryTypes } from "sequelize";
 
 export default async function (req: NextApiRequest, res: NextApiResponse) {
 	try {
 		if (req.method === "GET") {
-			const data = await carts.findAll({
-				include: [
-					{
-						association: "product",
-					},
-				],
-			});
-			res.status(200).json({ status: true, data: data });
+			const query = `SELECT * FROM carts
+						   INNER JOIN products ON carts.productId = products.id
+						   INNER JOIN users ON carts.userId = users.id  
+						   `;
+			const data = await connection.query(query, { type: QueryTypes.SELECT });
+
+			res.status(200).json({ status: true, data: data, model: products });
 		}
 		if (req.method === "POST") {
 			const data = await carts.create(req.body);
